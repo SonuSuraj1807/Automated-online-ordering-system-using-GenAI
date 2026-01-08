@@ -21,11 +21,11 @@ Jarvis is a voice-controlled AI assistant that automates the entire shopping exp
 * Google Chrome installed.
 * A Gemini API Key from Google AI Studio.
 
-### Installation
+# 1. Installation
 1. **Clone the repository**
-   git clone (https://github.com/SonuSuraj1807/Automated-online-ordering-system-using-GenAI.git)
+    git clone (https://github.com/SonuSuraj1807/Automated-online-ordering-system-using-GenAI.git)
 
-   cd Automated-online-ordering-system-using-GenAI
+2. cd Automated-online-ordering-system-using-GenAI
 
 # 2. Set up Virtual Environment
 # Windows
