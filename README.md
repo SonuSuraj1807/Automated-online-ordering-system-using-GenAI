@@ -24,6 +24,7 @@ Jarvis is a voice-controlled AI assistant that automates the entire shopping exp
 ### Installation
 1. **Clone the repository**
    git clone (https://github.com/SonuSuraj1807/Automated-online-ordering-system-using-GenAI.git)
+
    cd Automated-online-ordering-system-using-GenAI
 
 # 2. Set up Virtual Environment
@@ -74,29 +75,28 @@ Voice Commands
 # 📁 Project Structure
 
 ├── main.py              # Main automation engine
+
 ├── jarvis_core.py       # Speech-to-Text & Text-to-Speech logic
+
 ├── user_data/           # Saved browser session (Login data)
+
 └── requirements.txt     # Project dependencies
 
 # 📦 requirements.txt
 
 google-genai==1.56.0
+
 playwright==1.57.0
+
 SpeechRecognition==3.14.5
+
 pyttsx3==2.99
+
 PyAudio==0.2.14
+
 pydantic==2.12.5
+
 httpx==0.28.1
 
-📝 License
+# 📝 License
 This project is for educational purposes only.
-
-mermaid Diagrams
-graph TD;
-    User((User Voice)) -->|STT| Jarvis[Jarvis Core];
-    Jarvis -->|Intent| Gemini{Gemini 2.5};
-    Gemini -->|Search/Cmd| Browser[Playwright/Chrome];
-    Browser -->|Result| Jarvis;
-    Jarvis -->|TTS| User;
-
-    
