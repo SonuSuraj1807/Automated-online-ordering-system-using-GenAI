@@ -26,27 +26,30 @@ Jarvis is a voice-controlled AI assistant that automates the entire shopping exp
    git clone (https://github.com/SonuSuraj1807/Automated-online-ordering-system-using-GenAI.git)
    cd Automated-online-ordering-system-using-GenAI
 
-2. Set up Virtual Environment
+# 2. Set up Virtual Environment
 # Windows
 python -m venv venv
 venv\Scripts\activate
+Install Dependencies
 
 # Mac/Linux
 python3 -m venv venv
 source venv/bin/activate
 Install Dependencies
 
-3. Install Dependencies
+# 3. Install Dependencies
 pip install google-genai playwright jarvis_core
+
 playwright install chromium
 
-4.Set Environment Variable
+# 4.Set Environment Variable
 # Windows
 set GEMINI_API_KEY="your_actual_key_here"
 
 # Mac/Linux
 export GEMINI_API_KEY="your_actual_key_here"
-🎙️ Usage
+
+# 🎙️ Usage
 Run the main script:
 python main.py
 
