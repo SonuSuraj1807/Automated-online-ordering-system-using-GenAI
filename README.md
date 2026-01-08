@@ -23,7 +23,7 @@ Jarvis is a voice-controlled AI assistant that automates the entire shopping exp
 
 # 1. Installation
 1. **Clone the repository**
-    git clone (https://github.com/SonuSuraj1807/Automated-online-ordering-system-using-GenAI.git)
+   (https://github.com/SonuSuraj1807/Automated-online-ordering-system-using-GenAI.git)
 
 2. cd Automated-online-ordering-system-using-GenAI
 
@@ -59,18 +59,19 @@ Run the main script:
 
 python main.py
 
-Voice Commands
-"Jarvis, search for a MacBook Pro."
+Voice Commands:
 
-"Scroll down."
+1. "Jarvis, search for a MacBook Pro."
 
-"Select the first one."
+2. "Scroll down."
 
-"Add this to my cart."
+3. "Select the first one."
 
-"Proceed to checkout."
+4. "Add this to my cart."
 
-"Shutdown system."
+5. "Proceed to checkout."
+
+6. "Shutdown system."
 
 # 📁 Project Structure
 
