@@ -29,35 +29,35 @@ Jarvis is a voice-controlled AI assistant that automates the entire shopping exp
 
 # 2. Set up Virtual Environment
 # Windows
-python -m venv venv
+* python -m venv venv
 
-venv\Scripts\activate
+* venv\Scripts\activate
 
-Install Dependencies
+* Install Dependencies
 
 # Mac/Linux
-python3 -m venv venv
+* python3 -m venv venv
 
-source venv/bin/activate
+* source venv/bin/activate
 
-Install Dependencies
+* Install Dependencies
 
 # 3. Install Dependencies
-pip install google-genai playwright jarvis_core
+* pip install google-genai playwright jarvis_core
 
-playwright install chromium
+* playwright install chromium
 
 # 4. Set Environment Variable
 # Windows
-set GEMINI_API_KEY="your_actual_key_here"
+* set GEMINI_API_KEY="your_actual_key_here"
 
 # Mac/Linux
-export GEMINI_API_KEY="your_actual_key_here"
+* export GEMINI_API_KEY="your_actual_key_here"
 
 # 🎙️ Usage
 Run the main script:
 
-python main.py
+* python main.py
 
 Voice Commands:
 
@@ -85,19 +85,19 @@ Voice Commands:
 
 # 📦 requirements.txt
 
-google-genai==1.56.0
+* google-genai==1.56.0
 
-playwright==1.57.0
+* playwright==1.57.0
 
-SpeechRecognition==3.14.5
+* SpeechRecognition==3.14.5
 
-pyttsx3==2.99
+* pyttsx3==2.99
 
-PyAudio==0.2.14
+* PyAudio==0.2.14
 
-pydantic==2.12.5
+* pydantic==2.12.5
 
-httpx==0.28.1
+* httpx==0.28.1
 
 # 📝 License
 This project is for educational purposes only.
