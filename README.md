@@ -47,7 +47,7 @@ pip install google-genai playwright jarvis_core
 
 playwright install chromium
 
-# 4.Set Environment Variable
+# 4. Set Environment Variable
 # Windows
 set GEMINI_API_KEY="your_actual_key_here"
 
