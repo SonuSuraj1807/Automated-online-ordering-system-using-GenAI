@@ -1,0 +1,10 @@
+playwright
+google-genai
+SpeechRecognition
+pyttsx3
+pyaudio
+word2number
+python-dotenv
+rich
+openai
+groq

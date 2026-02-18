@@ -1,0 +1,182 @@
+========================================================================
+             JARVIS VOICE SHOPPING SYSTEM - TECHNICAL SETUP GUIDE
+========================================================================
+This guide provides step-by-step instructions to set up the Jarvis 
+automation environment on Windows and macOS using VS Code.
+
+------------------------------------------------------------------------
+0. INSTALLING PYTHON (IF NOT INSTALLED)
+------------------------------------------------------------------------
+If you don't have Python 3.10 - 3.13 installed, run these commands:
+
+--- FOR Windows ---
+Terminal: winget install Python.Python.3.12
+Manual:   Download from https://www.python.org/downloads/
+          (IMPORTANT: Check the box "Add Python to PATH" in the installer!)
+
+--- FOR macOS ---
+Terminal: brew install python@3.12
+
+------------------------------------------------------------------------
+1. PROJECT FOLDER STRUCTURE
+------------------------------------------------------------------------
+Run this command in your terminal to create all necessary folders:
+mkdir -p commerce_agents user_data Jarvis/final
+
+Ensure your files are organized as follows:
+
+Jarvis/ (Root Folder)
+├── main.py                  <-- The heart of the system (Run this)
+├── jarvis_core.py           <-- Voice (Speak/Listen) logic
+├── brain.py                 <-- Gemini AI Intent parsing
+├── browser_manager.py       <-- Playwright browser controller
+├── helpers.py               <-- Utility functions (price parsing, etc.)
+├── requirements.txt         <-- List of all dependencies
+├── .env                     <-- Your API Key (Create this manually)
+├── user_data/               <-- Auto-created: Stores your login session
+├── commerce_agents/         <-- Folder for store-specific logic
+│   ├── base_agent.py        <-- Abstract base class
+│   └── amazon_agent.py      <-- Amazon-specific automation logic
+└── Jarvis/
+    └── final/               <-- Auto-created: Where order receipts go
+
+------------------------------------------------------------------------
+2. VS CODE PREPARATION
+------------------------------------------------------------------------
+1. Install VS Code.
+2. Open the "Extensions" view (Ctrl+Shift+X) and install:
+   - "Python" (by Microsoft)
+3. Open the "Jarvis" folder in VS Code (File > Open Folder).
+
+------------------------------------------------------------------------
+3. VIRTUAL ENVIRONMENT SETUP (VS CODE TERMINAL)
+------------------------------------------------------------------------
+Open the integrated terminal in VS Code (Terminal > New Terminal).
+
+--- FOR WINDOWS USERS ---
+1. Create venv:
+   python -m venv venv
+
+2. Activate venv:
+   .\venv\Scripts\activate
+
+3. Set VS Code Interpreter:
+   - Press Ctrl+Shift+P
+   - Type "Python: Select Interpreter"
+   - Choose the one that says (.\venv\Scripts\python.exe)
+
+--- FOR macOS USERS ---
+1. Create venv:
+   python3 -m venv venv
+
+2. Activate venv:
+   source venv/bin/activate
+
+3. Set VS Code Interpreter:
+   - Press Cmd+Shift+P
+   - Type "Python: Select Interpreter"
+   - Choose the one that says (./venv/bin/python)
+
+------------------------------------------------------------------------
+4. INSTALLING DEPENDENCIES
+------------------------------------------------------------------------
+Once your virtual environment is activated (you see "(venv)" in the terminal):
+
+1. Install PortAudio (REQUIRED for Mic on Mac):
+   macOS: brew install portaudio
+   Windows: (Usually included in the pip wheels)
+
+2. Install Python Packages:
+   pip install -r requirements.txt
+
+3. Install Playwright Browsers:
+   playwright install chromium
+
+------------------------------------------------------------------------
+5. CONFIGURING THE BRAIN (.env)
+------------------------------------------------------------------------
+1. Right-click in the side-bar of VS Code and select "New File".
+2. Name it exactly: .env
+3. Paste the following line inside (replace with your actual key):
+   GEMINI_API_KEY=your_api_key_here
+   OPENAI_API_KEY=your_openai_key_here  <-- Optional Fallback 1
+   GROQ_API_KEY=your_groq_key_here      <-- Optional Fallback 2
+
+------------------------------------------------------------------------
+6. FIRST RUN & PERMANENT LOGIN
+------------------------------------------------------------------------
+To run the system:
+python main.py
+
+On the first run:
+1. Jarvis will open a browser window.
+2. Manually log in to your Amazon account.
+3. Once logged in, Jarvis will remember you FOREVER using the 'user_data' 
+   folder. You won't need to log in again.
+
+------------------------------------------------------------------------
+7. SPECIAL FEATURES: CANCELLATION & HELIOUS ROUTER
+------------------------------------------------------------------------
+- **Automated Cancellation**: Simply say "Cancel my order". Jarvis will 
+  navigate to your order history and confirm the removal of the last item.
+  
+- **Helious Router (3-Tier Failover)**: To prevent Gemini 429 errors, Jarvis 
+  includes a sophisticated 3-Tier Failover Router (Gemini -> OpenAI -> Groq).
+  
+  **TO DEMONSTRATE TO PROFESSOR**:
+  1. Break your GEMINI key in .env (add a letter to it).
+  2. Ask Jarvis to "Search for something".
+  3. The terminal will show: "Attempting OpenAI failover..."
+  4. Jarvis will finish the task using OpenAI, showing the robustness 
+     of your implementation.
+
+------------------------------------------------------------------------
+8. TROUBLESHOOTING COMMANDS
+------------------------------------------------------------------------
+- Force Package Update: pip install -U -r requirements.txt
+- Upgrade Pip: pip install --upgrade pip
+- Fix Mic Error (Mac): pip install --global-option='build_ext' --global-option='-I/usr/local/include' --global-option='-L/usr/local/lib' pyaudio
+- Reinstall Playwright: playwright install --with-deps chromium
+
+------------------------------------------------------------------------
+9. QUICK START COMMAND SEQUENCE (A-Z)
+------------------------------------------------------------------------
+Copy and paste these commands in order (adjust for your OS):
+
+# 1. Create Folders
+mkdir -p commerce_agents user_data Jarvis/final
+
+# 2. Setup environment (Mac/Linux)
+python3 -m venv venv && source venv/bin/activate
+
+# 2. Setup environment (Windows)
+python -m venv venv
+.\venv\Scripts\activate
+
+# 3. Install all logic
+# (Ensure (venv) is active in your terminal)
+pip install -r requirements.txt
+
+# 4. Start the system
+python main.py
+
+------------------------------------------------------------------------
+10. MASTER VOICE COMMAND SEQUENCE (A-Z FLOW)
+------------------------------------------------------------------------
+Speak these commands in order to complete a full purchase cycle:
+
+1. "Open Amazon"
+2. "Search for [Product Name]"
+3. "Scroll down" (to find the right one)
+4. "Select Option 1" (or "Select the one with price [Price]")
+5. "Add to cart"
+6. "Proceed to checkout"
+7. "Cash on Delivery"
+8. "Place order" 
+9. "Yes" (Final safety confirmation)
+
+Bonus: "Cancel my last order" -> "Yes" (Emergency Abort)
+
+========================================================================
+                  "Sir, everything is ready for deployment."
+========================================================================
