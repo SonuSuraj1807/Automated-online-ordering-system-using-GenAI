@@ -3,19 +3,36 @@ import speech_recognition as sr
 import sys
 import pyttsx3
 
-# Initialize pyttsx3 for Windows/Linux support
-try:
-    engine = pyttsx3.init()
-    # Configure voice if possible (generic attempt)
-    voices = engine.getProperty('voices')
-    for voice in voices:
-        if "Samantha" in voice.name or "Siri" in voice.name or "Zira" in voice.name:
-            engine.setProperty('voice', voice.id)
-            break
-    engine.setProperty('rate', 175)
-except Exception as e:
-    print(f"Warning: pyttsx3 init failed: {e}")
-    engine = None
+# Global engine variable
+engine = None
+
+def get_engine():
+    global engine
+    if engine is None:
+        try:
+            if sys.platform == "win32":
+                # Ensure COM is initialized for this thread
+                import pythoncom
+                pythoncom.CoInitialize()
+                engine = pyttsx3.init(driverName='sapi5')
+            else:
+                engine = pyttsx3.init()
+            
+            # Basic configuration
+            voices = engine.getProperty('voices')
+            for voice in voices:
+                name = voice.name.lower()
+                if "samantha" in name or "zira" in name or "siri" in name:
+                    engine.setProperty('voice', voice.id)
+                    break
+            engine.setProperty('rate', 185)
+        except Exception as e:
+            print(f"Warning: TTS initialization failed: {e}")
+            try:
+                engine = pyttsx3.init()
+            except:
+                engine = None
+    return engine
 
 def speak(text):
     """
@@ -40,11 +57,12 @@ def speak(text):
             subprocess.run(["say", text])
         else:
             # Windows/Linux
-            if engine:
-                engine.say(text)
-                engine.runAndWait()
+            current_engine = get_engine()
+            if current_engine:
+                current_engine.say(text)
+                current_engine.runAndWait()
             else:
-                print("TTS Engine not available.")
+                print(f"DEBUG: TTS Engine is None. Cannot speak: {text}")
     except Exception as e:
         print(f"TTS Error: {e}")
         # Fallback attempt on mac if say failed?

@@ -153,7 +153,7 @@ async def main():
             # --- IDLE STATE ---
             if state == States.IDLE:
                 if intent == "GENERAL":
-                    speak(data if data else "I am listening.")
+                    speak(str(data) if data else "I am listening.")
 
             # --- BROWSING / SEARCH RESULTS ---
             elif state in [States.BROWSING, States.SEARCH_RESULTS, "AWAITING_PRICE", "CONFIRM_SELECTION"]:

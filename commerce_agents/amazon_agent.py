@@ -15,7 +15,7 @@ class AmazonAgent(CommerceAgent):
         try:
             # If "Hello, sign in" is visible, we are likely not logged in.
             if await self.page.query_selector("text='Hello, sign in'"):
-                 self.speaker("It seems you are not logged in. Please log in manually once, and I will remember it next time.")
+                 self.speaker("Sir, it seems you are not logged in. Please log in manually once.")
                  # potentially wait here or just return
         except:
             pass
@@ -25,6 +25,7 @@ class AmazonAgent(CommerceAgent):
             await self.page.goto("https://www.amazon.in")
         
         await self.page.wait_for_selector("#twotabsearchtextbox", timeout=10000)
+        self.speaker(f"Searching Amazon for {query}")
         await self.page.fill("#twotabsearchtextbox", query)
         await self.page.press("#twotabsearchtextbox", "Enter")
         await self.page.wait_for_load_state("domcontentloaded")

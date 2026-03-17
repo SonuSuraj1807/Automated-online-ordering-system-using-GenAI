@@ -135,8 +135,11 @@ On the first run:
 ------------------------------------------------------------------------
 - Force Package Update: pip install -U -r requirements.txt
 - Upgrade Pip: pip install --upgrade pip
-- Fix Mic Error (Mac): pip install --global-option='build_ext' --global-option='-I/usr/local/include' --global-option='-L/usr/local/lib' pyaudio
+- Fix Mic Error (Mac): brew install portaudio && pip install pyaudio
+- Fix Speak/TTS Error (Windows): pip install pypiwin32
+- Fix Mic Error (Windows): pip install pyaudio
 - Reinstall Playwright: playwright install --with-deps chromium
+- Run Audio Diagnostic: python diagnose_windows_audio.py
 
 ------------------------------------------------------------------------
 9. QUICK START COMMAND SEQUENCE (A-Z)
