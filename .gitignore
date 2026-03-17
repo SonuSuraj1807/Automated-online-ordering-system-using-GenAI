@@ -11,6 +11,8 @@ env/
 # Project specific
 user_data/
 Jarvis/final/
+docs/reports/
+notes/
 
 # OS generated files
 .DS_Store
