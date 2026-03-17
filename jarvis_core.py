@@ -42,21 +42,38 @@ def speak(text):
     """
     # Sanitization for cleaner speech
     original_text = text
-    # 1. Handle commas in numbers (e.g., 1,000 -> 1000)
-    text = text.replace(",", "")
-    # 2. Handle Indian currency suffixes (e.g., 500/- -> 500)
-    text = text.replace("/-", "")
-    # 3. Handle currency symbols specifically for speech
-    text = text.replace("₹", " Rupees ")
-    text = text.replace("Rs.", " Rupees ")
+    text = text.replace(",", "").replace("/-", "").replace("₹", " Rupees ").replace("Rs.", " Rupees ")
     
     print(f"Jarvis: {original_text}")
     try:
         if sys.platform == "darwin":
             # macOS native
             subprocess.run(["say", text])
+        elif sys.platform == "win32":
+            # Windows high-reliability "atomic" speech
+            try:
+                import pythoncom
+                import pyttsx3
+                pythoncom.CoInitialize()
+                # Fresh engine per call prevents conflicts with the mic thread
+                win_engine = pyttsx3.init(driverName='sapi5')
+                win_engine.setProperty('rate', 185)
+                
+                # Selection of voice (prefer female/natural if found)
+                voices = win_engine.getProperty('voices')
+                for v in voices:
+                    if any(x in v.name.lower() for x in ["zira", "samantha", "siri"]):
+                        win_engine.setProperty('voice', v.id)
+                        break
+                
+                win_engine.say(text)
+                win_engine.runAndWait()
+                # Properly destroy engine to release device
+                del win_engine
+            except Exception as win_err:
+                print(f"Windows TTS Atomic Error: {win_err}")
         else:
-            # Windows/Linux
+            # Linux or others
             current_engine = get_engine()
             if current_engine:
                 current_engine.say(text)
