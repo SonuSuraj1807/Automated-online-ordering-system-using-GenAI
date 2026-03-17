@@ -30,13 +30,14 @@
 ```text
 Jarvis/
 ├── commerce_agents/      # Specialized shopping logic
-│   ├── amazon_agent.py   # Amazon-specific automation
-│   └── base_agent.py     # Core agent interface
-├── brain.py              # 3-Tier LLM Failover Logic (Helious Router)
+├── docs/reports/         # Generated project reports & documentation
+├── notes/                # Training datasets & voice command lists
 ├── jarvis_core.py        # Speech (STT/TTS) & System controls
-├── browser_manager.py    # Playwright session handler
+├── brain.py              # 3-Tier LLM Failover Logic (Helious Router)
 ├── main.py               # Main State Machine & User Loop
+├── browser_manager.py    # Playwright session handler
 ├── requirements.txt      # Project dependencies
+├── venv/                 # Virtual Environment
 └── .env                  # Secure API Credentials
 ```
 
