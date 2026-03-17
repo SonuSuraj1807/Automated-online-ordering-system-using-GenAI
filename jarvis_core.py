@@ -1,3 +1,7 @@
+import sys
+import subprocess
+import pyttsx3
+import speech_recognition as sr
 import time
 try:
     import pythoncom
@@ -62,12 +66,6 @@ def speak(text):
 
     except Exception as e:
         print(f"General TTS Error: {e}")
-        # Fallback attempt on mac if say failed?
-        if sys.platform == "darwin" and engine:
-             try:
-                engine.say(text)
-                engine.runAndWait()
-             except: pass
 
 def listen(timeout=5, phrase_time_limit=10):
     """
