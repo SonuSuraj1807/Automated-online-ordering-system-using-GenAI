@@ -55,6 +55,9 @@ async def main():
                 continue
             
             print(f"User said: {user_text}")
+            # Give the audio hardware a moment to switch from Mic to Speaker
+            if sys.platform == "win32":
+                await asyncio.sleep(0.2)
 
             # 2. CHECK GLOBAL EXIT
             if any(w in user_text.lower() for w in ["exit", "shutdown", "terminate"]):
